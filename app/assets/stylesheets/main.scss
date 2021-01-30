@@ -1,3 +1,62 @@
 // Place all the styles related to the contact controller here.
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.card-text {
+    height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+    
+    @media (max-width: 574px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 0.5rem 2rem;
+            grid-auto-rows: minmax(150px, auto);
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
+    @media (min-width: 575px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 0.5rem 2rem;
+            grid-auto-rows: minmax(150px, auto);
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
+    @media (min-width: 768px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 0.5rem 2rem;
+            grid-auto-rows: minmax(150px, auto);
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
+    @media (min-width: 992px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 0.5rem 2rem;
+            grid-auto-rows: minmax(150px, auto);
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
+    @media (min-width: 1200px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 0.5rem 2rem;
+            grid-auto-rows: minmax(150px, auto);
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
