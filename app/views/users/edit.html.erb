@@ -1,0 +1,24 @@
+<h3>User Edit Form</h3>
+<br>
+<%= form_with model: @user, local:true do |f|%>
+<% if @user.errors.any? %>
+<p>
+    <%= @user.errors.full_messages.join(', ')%>
+</p>
+<% end %>
+
+<div>
+    <%= f.label :name  %> 
+    <%= f.text_field :name  %> 
+</div>
+
+<div>
+    <%= f.label :email  %> 
+    <%= f.email_field :email  %> 
+</div>
+
+<%= link_to("Change Password",edit_password_path(@user.id)) %>
+
+<br><br>
+<%= f.submit "Save"%>
+<% end %>

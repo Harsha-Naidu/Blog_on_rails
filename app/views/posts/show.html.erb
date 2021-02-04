@@ -1,6 +1,6 @@
 
 
-<h3><%= @post.title%></h3>
+<h2><%= @post.title%></h2>
 <p><%= @post.body %></p>
 
 <div>
@@ -10,7 +10,49 @@
 </div>
 
 <div>
+<% if can? :crud, @post %>
     <%= link_to("Edit", edit_post_path(@post.id), class:"btn btn-outline-primary")%>  
-  
-    <%= link_to("Delete",post_path(@post.id),method: :delete,data:{confirm: "Are you sure you want to delete ?"}, class:"btn btn-outline-primary") %>   
+<% end %>
+
+<% if can? :crud, @post %>
+    <%= link_to("Delete",post_path(@post.id),method: :delete,data:{confirm: "Are you sure you want to delete ?"}, class:"btn btn-outline-primary") %>
+<% end %>   
 </div>
+
+<br>
+<h3>Comment</h3>
+
+<%= form_for [@post, @comment], local:true do |f| %>
+
+<ul>
+<% if @comment.errors.full_messages.each do |msg|%>
+
+    <li>
+        <%= msg %>
+    </li>
+<% end %>
+<% end %>
+</ul>
+
+
+  <%= f.text_area :body, cols:30 ,rows:2,class:"form-control", placeholder:"What's on your mind?" %>
+<br>
+  <%= f.submit "Submit", class:"btn btn-outline-primary" %>
+<% end %>
+<br>
+<% @comments.each do |comment|%>
+<p>
+<%= comment.body %>
+
+<div>
+    Commented
+    <%= time_ago_in_words(comment.created_at) %> ago <b> . </b>
+<span>
+<% if can? :crud, comment %>
+    <%= link_to "Delete",post_comment_path(@post,comment), method: :delete,data: {confirm: "Are you sure?"} %>
+<% end %>
+</span>
+</div>
+<hr>
+</p>
+<% end %>

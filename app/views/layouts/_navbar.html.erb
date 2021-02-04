@@ -6,12 +6,24 @@
 
         <ul class="navbar-nav ml-auto">
           
-          <li class="nav-item active" style="margin-right:20px;">
+          <li class="nav-item active mr-4">
             <%= link_to 'Home', root_path  %>
           </li>
           
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to 'New Post', new_post_path %>
+          </li>
+
+          <li class="nav-item mr-2">
+            <% if user_signed_in? %>
+                 Hello  <%= link_to current_user.name ,edit_user_path(current_user.id) %> 
+                 <%= link_to "Logout", session_path, method: :delete,
+                   data: {confirm: 'Are you sure you want to log out?'}
+                %>
+              <% else %>
+                <%= link_to "Login", new_session_path %>  |
+                <%= link_to "Sign Up", new_user_path %>
+            <% end %>
           </li>
          
         </ul>

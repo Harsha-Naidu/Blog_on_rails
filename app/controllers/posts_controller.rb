@@ -1,7 +1,10 @@
 #  rails g controller posts --no-helper --no-assets
 
 class PostsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :find_post, only:[:show, :edit, :update, :destroy]
+    before_action :authorize_user!,only:[:edit,:update,:destroy]
+
 
     def new
         @post = Post.new
@@ -9,6 +12,8 @@ class PostsController < ApplicationController
 
     def create
         @post=Post.new post_params
+        @post.user = current_user
+
         if @post.save
             flash[:notice]="Post created successfully."
             redirect_to post_path(@post.id) # show page   
@@ -22,7 +27,8 @@ class PostsController < ApplicationController
     end
 
     def show
-        
+        @comments=@post.comments.order(created_at: :desc)
+        @comment=Comment.new
     end
 
     def edit
@@ -51,6 +57,9 @@ class PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:title, :body)
+    end
+    def authorize_user!
+        redirect_to root_path, alert: 'Not Authorized' unless can?(:crud, @post) # can? (false) It is sending a particular post to 'can' method if the user == created_post_user it will authorize
     end
 
 end
